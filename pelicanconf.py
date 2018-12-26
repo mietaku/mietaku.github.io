@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = 'hogehoge'
+AUTHOR = 'hoge'
 SITENAME = "hogehoge's page"
 SITEURL = ''
 
