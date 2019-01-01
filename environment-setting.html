@@ -5,14 +5,14 @@
     <meta name="author" content="hoge" />
     <meta name="robots" content="index, follow"/>
 
-    <meta property="og:title" content="はじめてのペリカン"/>
-    <meta property="og:url" content="/first-post.html"/>
+    <meta property="og:title" content="環境構築メモ"/>
+    <meta property="og:url" content="/environment-setting.html"/>
     <meta property="og:site_name" content="hogehoge's page"/>
     <meta property="og:type" content="article"/>
 
-    <link rel="canonical" href="/first-post.html" />
+    <link rel="canonical" href="/environment-setting.html" />
 
-    <title>はじめてのペリカン | hogehoge's page</title>
+    <title>環境構築メモ | hogehoge's page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
@@ -60,39 +60,79 @@
     <article>
       <header>
         <h1 class="entry-title">
-          <a href="/first-post.html" rel="bookmark"
-             title="Permalink to はじめてのペリカン">はじめてのペリカン</a></h1>
+          <a href="/environment-setting.html" rel="bookmark"
+             title="Permalink to 環境構築メモ">環境構築メモ</a></h1>
       </header>
       <div class="entry-content">
 <footer class="post-info">
     <address class="vcard author">
-        by <a class="url fn" href="/author/hogehoge.html">hogehoge</a>
+        by <a class="url fn" href="/author/mietaku.html">mietaku</a>
     </address>
 
     in <a href="/category/python.html">Python</a>
 
-    on 2018-12-22
+    on 2018-12-25
 
         |
         tags:         <a href="/tag/pelican.html">pelican</a>
         <a href="/tag/python.html">python</a>
+        <a href="/tag/git.html">git</a>
 
 
 
     
 </footer><!-- /.post-info -->
 
-        <h1>Pelican で書いてみた</h1>
-<p>ブログサイトが作れる Python モジュール Pelican を使ってみた。</p>
-<p>サーバーは持っていないので、Github Pages で公開させてもらってます。</p>
-<p>キーワード</p>
-<ul>
-<li>pelican</li>
-<li>pyhton</li>
-<li>github.io</li>
-</ul>
-<p><code>python
- print "I'm not pelican."</code></p>
+        <h1>環境構築メモ</h1>
+<p>Pelican / github pages  環境構築時の手順メモを残しておきます。</p>
+<h2>Github 設定</h2>
+<p>1 . <a href="https://github.com/">Github</a> から新規アカウント作成</p>
+<p>2 . [username].github.io という名前で新規 repository 作成</p>
+<p>3 . clone 時に ssh を使いたい場合は、事前に公開鍵を github に登録しておく</p>
+<p>4 . git リポジトリ内の設定ファイル <code>.git/config</code> 内に以下を記述</p>
+<div class="highlight"><pre><span></span>[remote &quot;origin&quot;]  
+  url = git@github.com:[username]/[repositoryname].git  
+</pre></div>
+
+
+<p>5 . 自分のアカウントの ssh 設定を変更する
+  （github ドメインに ssh アクセスする際に特定の鍵を使うように指定する）。
+  <code>~/.ssh/config</code> に以下を記述  </p>
+<div class="highlight"><pre><span></span>Host github  
+  User [username]  
+  HostName github.com  
+  IdentityFile ~/.ssh/id_rsa  
+</pre></div>
+
+
+<p>6 . PCでターミナルを開き、clone 実行 <br>
+<code>$ git clone git@github.com:[username]/[reponame].git</code></p>
+<h2>Python 仮想環境構築</h2>
+<p>システムの Python をいじりたくないと思うので、仮想環境を構築</p>
+<p>pip を使って virtualenv をインストール</p>
+<p><code>$ pip install virtualenv</code></p>
+<p>仮想環境作成(実行ディレクトリ直下に [env_name] が作られる）
+<code>$ virtualenv [env_name]</code></p>
+<p>bin/activate を読み込む
+<code>$ source [env_root_path]/bin/activate</code></p>
+<p>仮想環境から抜ける
+<code>$ deactivate</code></p>
+<h2>Pelican インストール・初期化</h2>
+<p>pip を使って pelican をインストール</p>
+<p><code>$ pip install pelican</code></p>
+<p>また、編集や公開時に便利なモジュールもインストール</p>
+<p><code>$ pip install Markdown ghp-import</code></p>
+<p>クイックスタートコマンド実行でひな形が作られる</p>
+<p><code>$ pelican-quickstart</code></p>
+<p>content ディレクトリ以下にマークダウンファイル(.md)を配置し、
+make コマンドを実行する</p>
+<p><code>$ make html</code></p>
+<p>make serve でwebサーバー(port 8000)が立ち上がるのでブラウザから確認</p>
+<p><code>$ make serve</code></p>
+<p><code>http://localhost:8000</code></p>
+<p>とりあえず以上が最低限の設定。</p>
+<p>github.io との連携やテーマの変更方法はまた次回以降に書く。
+しばらくの目標は継続。メモ程度でちょっとずつ...</p>
 
       </div><!-- /.entry-content -->
 
